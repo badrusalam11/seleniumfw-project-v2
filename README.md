@@ -1,4 +1,4 @@
-# Seleniumfw
+# Seleniumfw - Project (V2)
 This is a python framework that customize the folder structure similar with Katalon's POM
 
 # Run with shortcut
