@@ -1,4 +1,3 @@
-import builtins
 import json
 import os
 import requests
@@ -11,6 +10,8 @@ from seleniumfw.listener_manager import (
     AfterTestCase,
 )
 from seleniumfw.config import Config
+from seleniumfw.thread_context import _thread_locals
+
 
 def get_date_parts_as_strings(datetime_str):
     dt = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S")
@@ -99,7 +100,8 @@ def after_suite(suite_path):
         return
     print("Sending to actmo...")
     # get report directory
-    report = builtins._active_report
+    report = getattr(_thread_locals, "report", None)
+    print("report_", report)
     report_dir = report.run_dir
     result_path = os.path.join(report_dir, "result.json")
     actmo_request = []
