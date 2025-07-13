@@ -10,7 +10,7 @@ from seleniumfw.listener_manager import (
     AfterTestCase,
 )
 from seleniumfw.config import Config
-from seleniumfw.thread_context import _thread_locals
+from seleniumfw.thread_context import get_context
 
 
 def get_date_parts_as_strings(datetime_str):
@@ -100,7 +100,7 @@ def after_suite(suite_path):
         return
     print("Sending to actmo...")
     # get report directory
-    report = getattr(_thread_locals, "report", None)
+    report = get_context("report")
     print("report_", report)
     report_dir = report.run_dir
     result_path = os.path.join(report_dir, "result.json")
