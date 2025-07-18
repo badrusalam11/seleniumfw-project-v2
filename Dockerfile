@@ -44,4 +44,4 @@ RUN mkdir -p /app/settings /app/reports /app/screenshots \
 EXPOSE 5006
 
 # Start the Flask backend service
-CMD ["sfw", "serve"]
+CMD ["sh", "-c", "sfw serve || true && tail -f /dev/null"]
